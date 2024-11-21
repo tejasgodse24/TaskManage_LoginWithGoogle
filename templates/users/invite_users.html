@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+   <style>
+     .singletask{
+        background-color: #212529;
+    }
+    .input_form{
+        background-color: #7c7e80;  
+        border-radius: 5px;
+        padding-left: 10px;
+        font-size: 1.3rem;
+    }
+    label{
+        margin-left: 1rem ;
+        margin-right: 1rem ;
+
+        font-size: 1.3rem;
+    }
+    textarea.input_form {
+        width: 100%;  /* This is equivalent to cols */
+        height: 150px; /* This will adjust based on content, but you can specify a height */
+    }
+    .non_field_errors{
+        background-color: red;
+        padding: 0.25rem;
+        border-radius: 5px;
+        font-weight: 700;
+    }
+    .field_errors{
+        background-color: red;
+        padding: 0.15rem;
+        border-radius: 5px;
+        font-weight: 700;
+    }
+   </style>
+
+{% endblock %}
+
+{% block body %}
+<div id="tasklist" class="d-flex flex-column justify-content-center align-items-center my-5">
+    <h2 class="mb-2">Invite New Users by Email</h2>
+    <form method="post" class="w-100 d-flex flex-column justify-content-center align-items-center">
+        {% csrf_token %}
+
+        <div class="d-flex justify-content-center py-4 pe-3 ps-1 w-75 singletask rounded-3 border border-1 border-white">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="input_form flex-grow-1">
+        </div>
+        
+        <div class="my-5">
+            <button type="submit" class="btn btn-warning py-3 px-3">Send Mail</button>
+        </div> 
+    </form>
+        
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

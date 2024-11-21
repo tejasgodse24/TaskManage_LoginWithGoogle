@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+   <style>
+     .singletask{
+        background-color: #212529;
+    }
+    .input_form{
+        background-color: #7c7e80;  
+        border-radius: 5px;
+        padding-left: 10px;
+        font-size: 1.3rem;
+    }
+    label{
+        margin-left: 1rem ;
+        margin-right: 1rem ;
+
+        font-size: 1.3rem;
+    }
+    textarea.input_form {
+        width: 100%;  /* This is equivalent to cols */
+        height: 150px; /* This will adjust based on content, but you can specify a height */
+    }
+   </style>
+
+{% endblock %}
+
+{% block body %}
+<div id="tasklist" class="d-flex flex-column justify-content-center align-items-center my-5">
+
+    {% if form %}
+        <form method="post" class="w-100 d-flex flex-column justify-content-center align-items-center">
+            {% csrf_token %}
+            {% for fm in form %}
+            <div class="d-flex justify-content-between py-4 pe-3 ps-1 w-75 singletask rounded-3 border border-1 border-white">
+                {{fm.label_tag}}
+                {{fm}}
+                <div>{{fm.errors|striptags}}</div>
+            </div>
+            {% endfor %} 
+            <div class="my-5">
+                <button type="submit" class="btn btn-warning py-3 px-3">Save</button>
+            </div> 
+        </form>
+        
+        <!-- {% for f in form %}
+        <div class="d-flex justify-content-between py-3 pe-3 ps-1 w-75 singletask rounded-3 border border-1 border-white">
+            <h2 class="d-flex justify-content-center align-items-center py-auto mx-3">1.</h2>
+            <div class="flex-grow-1">
+                <h3>{{task.heading}}</h3>
+                <p>{{task.desc}}</p>
+            </div>
+            <div class="d-flex justify-content-start gap-2 align-items-center ">
+                <a href="#" class="btn btn-success" style="height: 40px;">Edit</a>
+                <a href="#" class="btn btn-danger" style="height: 40px;">Delete</a>
+            </div>
+        </div>
+        {% endfor %} -->
+    {% else %}
+    <div class="text-center py-3 pe-3 ps-1 w-75 singletask rounded-3 border border-1 border-white">
+        
+        <h4>No Such Task Exists...</h4>
+    </div>
+    {% endif %}
+
+    
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

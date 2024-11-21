@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+   <style>
+     .singletask{
+        background-color: #212529;
+    }
+    .status{
+        font-size: 0.85rem !important;
+        color: white;
+        padding: 0.55rem;
+        border-radius: 10px;
+        margin-left: 1rem;
+        font-weight: 600;
+    }
+    
+    .green{
+        background-color: green;
+    }
+    .red{
+        background-color: red;
+    }
+    .created_at{
+        font-size: 0.85rem;
+    }
+    p {
+        margin: 0.25rem;
+    }
+    p .headins{
+        font-size: 1rem;
+    }
+    .login_div{
+        height: 50vh;
+    }
+    .login_btn{
+        font-size: 1.5rem;
+    }
+   </style>
+
+{% endblock %}
+
+{% block body %}
+{% load socialaccount %}
+
+    <!-- <h2>Google Login</h2> -->
+    <div class="d-flex justify-content-center align-items-center login_div">
+        <a class="btn btn-dark p-3 login_btn" href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <div>
+    
+</div>
+
+    {% endif %}
+
+
+{% endblock %}

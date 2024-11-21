@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+   <style>
+     .singletask{
+        background-color: #212529;
+    }
+    .status{
+        font-size: 0.85rem !important;
+        color: white;
+        padding: 0.15rem;
+        border-radius: 10px;
+        margin-left: 1rem;
+        font-weight: 600;
+    }
+    .green{
+        background-color: green;
+    }
+    .red{
+        background-color: red;
+    }
+    .created_at{
+        font-size: 0.85rem;
+    }
+    p{
+        margin: 0;
+    }
+   </style>
+
+{% endblock %}
+
+{% block body %}
+<div id="tasklist" class="d-flex flex-column justify-content-center align-items-center my-5">
+    <h2 class="mb-2">Tasks</h2>
+    {% include 'base/alerts.html' %}
+
+    {% if tasklist %}
+        {% for task in tasklist %}
+        <div class="d-flex justify-content-between py-3 pe-3 w-100 singletask rounded-3 border border-1 border-white gap-4">
+            <h2 class="d-flex justify-content-center align-items-center mx-3">{{forloop.counter}}.</h2>
+            <div class="w-75">
+                <h3>{{task.heading}} {%if task.is_completed == True%} <span class="status green">Completed</span> {% else %}<span class="status red">Pending</span>  {% endif %}</h3>
+                <p class="created_at">Created On : {{task.created_at}}</p>
+                <p>{{task.desc}}</p>
+            </div>
+            <div class="w-25 d-flex flex-wrap justify-content-start gap-2 align-items-center ">
+                <a href="{% url 'complete_task' id=task.id %}" class="btn btn-success" style="height: 40px;">Complete Task </a>
+                <a href="{% url 'edit_task' id=task.id %}" class="btn btn-success" style="height: 40px;">Edit</a>
+                <a href="{% url 'delete_task' id=task.id %}" class="btn btn-danger" style="height: 40px;">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+    <div class="text-center py-3 pe-3 ps-1 w-75 singletask rounded-3 border border-1 border-white">
+        
+        <h4>No tasks Created...</h4>
+    </div>
+    {% endif %}
+
+    <div class="my-5">
+        <a href="{% url 'add_task' %}" class="btn btn-warning py-3 px-3">Add New</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    const showMessages = ()=>{
+        messageDivElement = document.getElementById("message_div")
+        messageDivElement.style.visibility = "hidden"
+    }
+    setTimeout(showMessages, 5000)
+</script>
+{% endblock %}

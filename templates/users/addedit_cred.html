@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+   <style>
+     .singletask{
+        background-color: #212529;
+    }
+    .input_form{
+        background-color: #7c7e80;  
+        border-radius: 5px;
+        padding-left: 10px;
+        font-size: 1.3rem;
+    }
+    label{
+        margin-left: 1rem ;
+        margin-right: 1rem ;
+
+        font-size: 1.3rem;
+    }
+    textarea.input_form {
+        width: 100%;  /* This is equivalent to cols */
+        height: 150px; /* This will adjust based on content, but you can specify a height */
+    }
+    .non_field_errors{
+        background-color: red;
+        padding: 0.25rem;
+        border-radius: 5px;
+        font-weight: 700;
+    }
+    .field_errors{
+        background-color: red;
+        padding: 0.15rem;
+        border-radius: 5px;
+        font-weight: 700;
+    }
+   </style>
+
+{% endblock %}
+
+{% block body %}
+<div id="tasklist" class="d-flex flex-column justify-content-center align-items-center my-5">
+
+    {% if form %}
+        <form method="post" class="w-100 d-flex flex-column justify-content-center align-items-center">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="non_field_errors">{{error}}</p>
+                {% endfor %}
+            {% endif %}
+
+            {% for fm in form %}
+         
+            <div class="d-flex justify-content-between py-4 pe-3 ps-1 w-75 singletask rounded-3 border border-1 border-white">
+                {{fm.label_tag}}
+                {{fm}}
+            </div>
+            {% endfor %} 
+            <div class="my-5">
+                <button type="submit" class="btn btn-warning py-3 px-3">Save</button>
+            </div> 
+        </form>
+        
+    {% else %}
+    <div class="text-center py-3 pe-3 ps-1 w-75 singletask rounded-3 border border-1 border-white">
+        
+        <h4>No Such Cred Exists...</h4>
+    </div>
+    {% endif %}
+
+    
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

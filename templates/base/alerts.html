@@ -1,0 +1,21 @@
+
+<style>
+    .message_div{
+        position: absolute;
+        top: 6rem;
+        transition: all 0.5s ease-out;
+    }
+    .alert_message{
+        padding: 0.45rem 0.85rem;
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+</style>
+
+{% if messages %}
+    <div class=" message_div  d-flex flex-column gap-2" id="message_div">
+        {% for message in messages %}
+            <div class="alert_message bg-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
